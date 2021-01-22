@@ -83,6 +83,7 @@ Renderer::Renderer(GLFWwindow* window, Character* character) {
     ResourceManager::loadShader("fullscreen", "sprite", "fullscreenSprite");
     ResourceManager::loadShader("fullscreen", "simple", "fullscreenSimple");
     ResourceManager::loadShader("sprite", "text", "text");
+    ResourceManager::loadShader("fullscreen", "vignette", "fullscreenVignette");
     ResourceManager::loadTexture("floor.png", false, "floor");
     ResourceManager::loadTexture("hoodedpurpchar.png", true, "character");
     ResourceManager::loadFont("OpenSans-Regular.ttf", 48, "pauseItems");
@@ -117,7 +118,7 @@ void Renderer::setScene(SceneEnum sceneEnum, const std::shared_ptr<Scene>& newSc
     scenes[sceneEnum] = newScene;
 }
 
-void Renderer::drawText(const std::string& text, const std::string& font, glm::vec2 pos) const {
+void Renderer::drawText(const std::string& text, const std::string& font, glm::vec2 pos, glm::vec3 color) const {
     std::vector<float> vertices;
 
     const std::array<FontChar, 128> fontChars = ResourceManager::getFont(font);
@@ -154,6 +155,7 @@ void Renderer::drawText(const std::string& text, const std::string& font, glm::v
     glUseProgram(textShader);
     glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(pos.x, pos.y - (0.02222f), 0.0f)); // pos.x - x / 2 for center x
     glUniformMatrix4fv(glGetUniformLocation(textShader, "model"), 1, GL_FALSE, glm::value_ptr(model));
+    glUniform3fv(glGetUniformLocation(textShader, "color"), 1, glm::value_ptr(color));
     glDrawArrays(GL_TRIANGLES, 0, vertices.size());
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

@@ -47,13 +47,13 @@ void PauseMenuScene::onStart() {
 void PauseMenuScene::onEnd() {}
 
 void PauseMenuScene::render() {
-    GLuint fullscreenSpriteShader = ResourceManager::getShader("fullscreenSprite");
     GLuint fullscreenSimpleShader = ResourceManager::getShader("fullscreenSimple");
+    GLuint fullscreenVignetteShader = ResourceManager::getShader("fullscreenVignette");
 
     glBindVertexArray(renderer->getStandardVAO());
 
-    glUseProgram(fullscreenSpriteShader);
-    glUniformMatrix4fv(glGetUniformLocation(fullscreenSpriteShader, "model"), 1, GL_FALSE, glm::value_ptr(glm::mat4(1.0f)));
+    glUseProgram(fullscreenVignetteShader);
+    glUniformMatrix4fv(glGetUniformLocation(fullscreenVignetteShader, "model"), 1, GL_FALSE, glm::value_ptr(glm::mat4(1.0f)));
     glBindTexture(GL_TEXTURE_2D, pauseTextures[1]);
     glDrawArrays(GL_TRIANGLE_FAN, 0, 6);
 
@@ -67,8 +67,8 @@ void PauseMenuScene::render() {
     glUniform4fv(glGetUniformLocation(fullscreenSimpleShader, "color"), 1, glm::value_ptr(glm::vec4(0.0f, 0.0f, 0.0f, 0.6f)));
     glDrawArrays(GL_TRIANGLE_FAN, 0, 6);
 
-    renderer->drawText("RESUME", "pauseItems", glm::vec2(-0.5f, 0.198f));
-    renderer->drawText("OPTIONS", "pauseItems", glm::vec2(-0.5f, 0.066f));
-    renderer->drawText("CONTROLS", "pauseItems", glm::vec2(-0.5f, -0.066f));
-    renderer->drawText("EXIT GAME", "pauseItems", glm::vec2(-0.5f, -0.198f));
+    renderer->drawText("RESUME", "pauseItems", glm::vec2(-0.5f, 0.198f), glm::vec3(1.0f, 1.0f, 1.0f));
+    renderer->drawText("OPTIONS", "pauseItems", glm::vec2(-0.5f, 0.066f), glm::vec3(0.5f, 0.5f, 0.5f));
+    renderer->drawText("CONTROLS", "pauseItems", glm::vec2(-0.5f, -0.066f), glm::vec3(0.5f, 0.5f, 0.5f));
+    renderer->drawText("EXIT GAME", "pauseItems", glm::vec2(-0.5f, -0.198f), glm::vec3(0.5f, 0.5f, 0.5f));
 }
