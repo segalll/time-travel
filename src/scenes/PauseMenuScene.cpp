@@ -5,12 +5,6 @@
 
 #include <stdexcept>
 
-void resetFramebuffer(GLuint fbo) {
-    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-}
-
 PauseMenuScene::PauseMenuScene(Renderer* r, glm::ivec2 windowSize) : renderer(r) {
     for (int i = 0; i < 2; i++) {
         glGenFramebuffers(1, &pauseFBOs[i]);
@@ -32,10 +26,10 @@ PauseMenuScene::PauseMenuScene(Renderer* r, glm::ivec2 windowSize) : renderer(r)
 }
 
 void PauseMenuScene::onStart() {
-    for (int i = 0; i < 2; i++) {
-        resetFramebuffer(pauseFBOs[i]);
+    for (int i = 1; i >= 0; i--) { // intentionally 1 then 0 because we want 0 to be bound at the end
+        glBindFramebuffer(GL_FRAMEBUFFER, pauseFBOs[i]);
+        glClear(GL_COLOR_BUFFER_BIT);
     }
-    glBindFramebuffer(GL_FRAMEBUFFER, pauseFBOs[0]);
 
     renderer->getScene(SceneEnum::Game)->render();
 
