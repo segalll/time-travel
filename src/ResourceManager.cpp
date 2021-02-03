@@ -52,7 +52,7 @@ namespace {
         glLinkProgram(shaderProgram);
 
         GLint isLinked = 0;
-        glGetProgramiv(shaderProgram, GL_LINK_STATUS, (int *) &isLinked);
+        glGetProgramiv(shaderProgram, GL_LINK_STATUS, (int*)&isLinked);
         if (isLinked == GL_FALSE) {
             std::cout << "Shader program failed to link" << std::endl;
 
