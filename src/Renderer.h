@@ -3,8 +3,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "../GameState.h"
-#include "../ResourceManager.h"
+#include "GameState.h"
+#include "ResourceManager.h"
 
 class Renderer {
 private:

@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include "GameState.h"
-#include "renderer/Renderer.h"
+#include "Renderer.h"
 
 void mainLoop(GLFWwindow* window) {
     GameState gameState;
