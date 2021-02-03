@@ -38,7 +38,7 @@ namespace {
 
             vertexCode = vShaderStream.str();
             fragmentCode = fShaderStream.str();
-        } catch (const std::exception &e) {
+        } catch (const std::exception& e) {
             throw std::runtime_error("Failed to read shader files");
         }
 
