@@ -7,9 +7,8 @@
 #include "renderer/Renderer.h"
 
 void mainLoop(GLFWwindow* window) {
-    Character character;
-    GameState gameState(&character);
-    Renderer renderer(window, &character);
+    GameState gameState;
+    Renderer renderer(window);
     while (!glfwWindowShouldClose(window)) {
         gameState.update(window);
         renderer.renderState(window, gameState);

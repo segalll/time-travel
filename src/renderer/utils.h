@@ -2,7 +2,6 @@
 
 #include <GL/glew.h>
 
-#include <array>
+#include <vector>
 
-GLuint createRenderData(std::array<float, 24> vertices); // static draw
-GLuint createRenderData(); // dynamic draw
+GLuint createRenderData(std::vector<float> vertices); // static draw
