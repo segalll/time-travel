@@ -13,7 +13,6 @@ private:
     GLuint standardVao;
 public:
     explicit Renderer(GLFWwindow* window);
-    ~Renderer();
-    [[nodiscard]] GLuint getUBO() const;
+    [[nodiscard]] unsigned int getUBO() const;
     void renderState(GLFWwindow* window, const GameState& state);
 };

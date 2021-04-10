@@ -1,5 +1,7 @@
 #include "Character.h"
 
+#include <glm/gtc/matrix_transform.hpp>
+
 Character::Character() {
     pos = glm::vec2(0.0f, 0.0f);
     dir = 1.0f;

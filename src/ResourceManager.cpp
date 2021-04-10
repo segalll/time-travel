@@ -1,5 +1,7 @@
 #include "ResourceManager.h"
 
+#include <GL/glew.h>
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -97,6 +99,15 @@ namespace {
     }
 }
 
+ResourceManager::~ResourceManager() {
+    for (const auto& i : shaders) {
+        glDeleteProgram(i.second);
+    }
+    for (const auto& i : textures) {
+        glDeleteTextures(1, &i.second);
+    }
+}
+
 GLuint ResourceManager::loadShader(const std::string& vShaderName, const std::string& fShaderName, const std::string& name) {
     std::string vFile = "shaders/" + vShaderName;
     std::string fFile = "shaders/" + fShaderName;
@@ -116,13 +127,4 @@ GLuint ResourceManager::loadTexture(const std::string& file, bool alpha, const s
 
 GLuint ResourceManager::getTexture(const std::string& name) {
     return textures[name];
-}
-
-void ResourceManager::clear() {
-    for (const auto& i : shaders) {
-        glDeleteProgram(i.second);
-    }
-    for (const auto& i : textures) {
-        glDeleteTextures(1, &i.second);
-    }
 }

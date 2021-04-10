@@ -75,10 +75,6 @@ Renderer::Renderer(GLFWwindow* window) {
     resourceManager.loadTexture("hoodedpurpchar.png", true, "character");
 }
 
-Renderer::~Renderer() {
-    resourceManager.clear();
-}
-
 GLuint Renderer::getUBO() const {
     return ubo;
 }
